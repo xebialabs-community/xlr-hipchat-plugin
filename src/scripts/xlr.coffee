@@ -5,6 +5,7 @@
 #   @ClarkHubot release templateId 4.0.5
 module.exports = (robot) ->
   url = process.env.HUBOT_XLRELEASE_URL
+  notifyUrl = process.env.HUBOT_XLRELEASE_NOTIFY_URL
   auth = 'Basic ' + new Buffer(process.env.HUBOT_XLRELEASE_AUTH).toString('base64')
 
   startRelease = (msg, releaseId, data) ->
@@ -29,7 +30,7 @@ module.exports = (robot) ->
       releaseTitle: "Release from HipChat #{version}",
       releaseVariables:
         '${version}': version
-        '${notifyURL}': 'https://salty-ridge-9044.herokuapp.com/hubot/successful'
+        '${notifyURL}': "#{notifyUrl}"
         '${room}': room
 
     startRelease msg, templateID, data
