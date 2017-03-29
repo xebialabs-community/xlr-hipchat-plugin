@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+    FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+-->
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd"
+           xmlns="http://www.xebialabs.com/deployit/synthetic"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- HipChat Authentication Configuration -->
+    <type type="hipchat.Authentication" extends="xlrelease.Configuration">
+        <property name="url" label="HipChat REST API URL" required="true" description="HipChat API URL." default="https://api.hipchat.com/v2"/>
+        <property name="api_access_token" label="API Access Token" required="true" password="true" description="API Access Token for authentication on HipChat."/>
+    </type>
+
+    <!-- HipChat Task Configurations -->
+    <type type="hipchat.Task" extends="xlrelease.PythonScript" virtual="true">
+        <property name="scriptLocation" default="hipchat/HipchatTask.py" hidden="true"/>
+        <property name="iconLocation" default="hipchat/hipchat-logo.png" hidden="true"/>
+        <property name="hipchat_authentication" category="input" label="HipChat Authentication" referenced-type="hipchat.Authentication" kind="ci" required="true" description="HipChat Authentication."/>
+        <property name="output" category="output" kind="string" size="large" label="Output" description="The output returned from execution of the HipChat task."/>
+    </type>
+
+    <type type="hipchat.NotificationTask" extends="hipchat.Task" virtual="true">
+        <property name="hipchat_notification_message" label="Message" category="input" required="true" description="HipChat notification message to send."/>
+    </type>
+
+    <type type="hipchat.SendRoomNotification" extends="hipchat.NotificationTask">
+        <property name="room_id" category="input" label="Room ID" required="true" description="ID of the HipChat room to be notified."/>
+    </type>
+</synthetic>

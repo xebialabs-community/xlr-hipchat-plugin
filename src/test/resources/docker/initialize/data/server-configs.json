@@ -1,0 +1,10 @@
+[
+  {
+    "type":"hipchat.Authentication",
+    "url":"https://hipchat.com",
+    "username":"username",
+    "password":"password",
+    "title":"HipChat",
+    "id":"Configuration/Custom/Configuration283855410"
+  }
+]
