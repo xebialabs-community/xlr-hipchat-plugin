@@ -14,7 +14,7 @@ This module offers a basic interface to HipChat functionality.
 Copy the plugin JAR file into the `SERVER_HOME/plugins` directory of XL Release.
 
 ## HipChat Authentication
-Configures the credentials used to authenticate with the HipChat REST API. You should use the API access token configured in your [account](https://www.hipchat.com/account/api) 
+Configures the credentials used to authenticate with the HipChat REST API. You should use the API access token configured in your[HipChat](https://www.hipchat.com/account/api)account. 
 
 ![HipChatAuthenticationConfiguration](images/HipChatAuthenticationConfiguration.png)
 
@@ -25,3 +25,8 @@ The available tasks for interfacing with HipChat. These tasks utilize the HipCha
 Sends the specified notification message to the specified room.
 
 ![HipChatSendRoomNotification](images/HipChatSendRoomNotification.png)
+
+--- 
+
+## References:
+* [HipChat REST API](https://www.hipchat.com/docs/apiv2)
