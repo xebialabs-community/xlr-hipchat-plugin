@@ -18,9 +18,15 @@ class HipchatClient(object):
     def get_client(hipchat_authentication):
         return HipchatClient(hipchat_authentication)
 
-    def hipchat_sendroomnotification(self, variables):
-        message_json='{"message":"%s"}' % variables['hipchat_notification_message']
-        return self.get_response_for_endpoint('POST', 'room/%s/notification' % variables['room_id'], 'Could not notify room [%s]' % variables['room_id'], data=message_json)
+    def notify(self, type, id, message):
+        message_json='{"message":"%s","notify":"true"}' % message
+        return self.get_response_for_endpoint('POST', type, 'Could not perform operation for [%s]' % id, data=message_json)
+
+    def hipchat_notifyroom(self, variables):
+        return self.notify('room/%s/notification' % variables['room_id'], variables['room_id'], variables['message'])
+
+    def hipchat_messageuser(self, variables):
+        return self.notify('user/%s/message' % variables['user_id'], variables['user_id'], variables['message'])
 
     def open_url(self, method, url, headers=None, data=None, json_data=None):
         if headers is None:

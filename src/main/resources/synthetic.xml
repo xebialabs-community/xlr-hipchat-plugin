@@ -23,10 +23,15 @@
     </type>
 
     <type type="hipchat.NotificationTask" extends="hipchat.Task" virtual="true">
-        <property name="hipchat_notification_message" label="Message" category="input" required="true" description="HipChat notification message to send."/>
+        <property name="message" label="Message" category="input" required="true" description="HipChat notification message to send."/>
     </type>
 
-    <type type="hipchat.SendRoomNotification" extends="hipchat.NotificationTask">
-        <property name="room_id" category="input" label="Room ID" required="true" description="ID of the HipChat room to be notified."/>
+    <type type="hipchat.NotifyRoom" extends="hipchat.NotificationTask">
+        <property name="room_id" category="input" label="Room" required="true" description="Name or ID of the HipChat room to notify."/>
+    </type>
+
+    <type type="hipchat.MessageUser" extends="hipchat.NotificationTask">
+        <property name="user_id" category="input" label="User" required="true" description="Name or email of the HipChat user to message."/>
     </type>
 </synthetic>
+
