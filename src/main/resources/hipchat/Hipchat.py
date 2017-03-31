@@ -18,20 +18,19 @@ class HipchatClient(object):
     def get_client(hipchat_authentication):
         return HipchatClient(hipchat_authentication)
 
-    def notify(self, type, id, message):
+    def notify(self, type, id, end, message):
         message_json='{"message":"%s","notify":"true"}' % message
-        return self.get_response_for_endpoint('POST', type, 'Could not perform operation for [%s]' % id, data=message_json)
+        return self.get_response_for_endpoint('POST', '%s/%s/%s' % (type, id, end), 'Could not perform operation for [%s].' % id, data=message_json)
 
     def hipchat_notifyroom(self, variables):
-        return self.notify('room/%s/notification' % variables['room_id'], variables['room_id'], variables['message'])
+        return self.notify('room', variables['room_id'], 'notification', variables['message'])
 
     def hipchat_messageuser(self, variables):
-        return self.notify('user/%s/message' % variables['user_id'], variables['user_id'], variables['message'])
+        return self.notify('user', variables['user_id'], 'message', variables['message'])
 
     def open_url(self, method, url, headers=None, data=None, json_data=None):
         if headers is None:
             headers = self.headers
-        print "url : %s" % url
         return requests.request('%s' % method, url, data=data, json=json_data, headers=headers, verify=False)
 
     def get_response_for_endpoint(self, method, endpoint, error_message, object_id=None, json_data=None, data=None, headers=None):
