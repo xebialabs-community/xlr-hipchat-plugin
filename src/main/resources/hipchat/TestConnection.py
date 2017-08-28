@@ -1,5 +1,3 @@
-#!/bin/sh
-
 #
 # Copyright 2017 XEBIALABS
 #
@@ -10,23 +8,10 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-SCRIPT=$(readlink -f "$0")
-echo "SCRIPT=${SCRIPT}"
-# Absolute path this script is in, thus /home/user/bin
-SCRIPTPATH=$(dirname "$SCRIPT")
-echo "SCRIPTPATH=${SCRIPTPATH}"
+from hipchat.Hipchat import HipchatClient
 
-####################### XLR server data
-
-
-wget --http-user=admin --http-password=admin --auth-no-challenge \
-     --header="Accept: application/json" \
-     --header="Content-type: application/json" \
-     --post-file=$SCRIPTPATH/data/server-configs.json \
-    http://localhost:5516/repository/cis -O /dev/null
-
-wget --http-user=admin --http-password=admin --auth-no-challenge \
-     --header="Accept: application/json" \
-     --header="Content-type: application/json" \
-     --post-file=$SCRIPTPATH/data/release-template.json \
-     http://localhost:5516/api/v1/templates/import -O /dev/null
+server = {}
+server['url'] = configuration.url
+server['api_access_token'] = configuration.api_access_token
+hipchat = HipchatClient.get_client(server)
+hipchat.test_connection()
