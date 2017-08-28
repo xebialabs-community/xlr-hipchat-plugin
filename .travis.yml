@@ -10,7 +10,7 @@ deploy:
     repo: xebialabs-community/xlr-hipchat-plugin
   api_key:
     secure:
-      secure: HoIWUS8OPbl9HYuEmCPJBx2NTt8iHW6ij0lNoALYFmOgT41QCuDrA4WZpdeArba6aT6mz+6TZmSBz0ae/lCdsYhg8vefzOKScOvNtg3eINvXObEUHJ2mHI3rXX4KeJRebrsRO85W4e4E1l/GElND7H0wHeNRYla8Vl/5qlB6Dy0=
+      secure: XMPXusk3bNGv4Bz99ujBdO4+JBtGQAhZfICmPq3nEr/7RRdKWQzG+/qTVdmp42y61kP/iWnMmdfVHHvs/QzzXDu/cjtgZEC1rmaMx9B6CXmISGj2vnHje4VvjGKZJhYI6RnfebEP1ElbMCZVKYcFWJ/Edmyt4Rz7m7RApTW6umU=
 notifications:
   hipchat:
     rooms:
