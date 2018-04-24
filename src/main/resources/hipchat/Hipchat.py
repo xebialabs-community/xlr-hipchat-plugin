@@ -1,5 +1,6 @@
 #
-# Copyright 2017 XEBIALABS
+#
+# Copyright 2018 XEBIALABS
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 #
@@ -23,15 +24,17 @@ class HipchatClient(object):
     def get_client(hipchat_authentication):
         return HipchatClient(hipchat_authentication)
 
-    def notify(self, type, id, end, message):
-        message_json='{"message":"%s","notify":"true"}' % message
+    def notify(self, type, id, end, message, color):
+        message_json='{"message":%s,"notify":"true","color":"%s"}' % (json.dumps(message), color)
         return self.get_response_for_endpoint('POST', '%s/%s/%s' % (type, id, end), 'Could not perform operation for [%s].' % id, data=message_json)
 
     def hipchat_notifyroom(self, variables):
-        return self.notify('room', variables['room_id'], 'notification', variables['message'])
+        return self.notify('room', variables['room_id'], 'notification', variables['message'],
+                           variables['color'])
 
     def hipchat_messageuser(self, variables):
-        return self.notify('user', variables['user_id'], 'message', variables['message'])
+        return self.notify('user', variables['user_id'], 'message', variables['message'],
+                           variables['color'])
 
     def open_url(self, method, url, headers=None, data=None, json_data=None):
         if headers is None:
@@ -44,7 +47,7 @@ class HipchatClient(object):
             full_endpoint_url = "%s/%s" % (full_endpoint_url, object_id)
         response = self.open_url(method, full_endpoint_url, headers=headers, json_data=json_data, data=data)
         if not response.ok:
-            raise Exception("%s [%s]" % (error_message, response.status_code))
+            raise Exception("%s [%s: %s]" % (error_message, response.status_code, response.text))
         return response.text
 
     def test_connection(self):

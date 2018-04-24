@@ -1,9 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
-    Copyright 2017 XEBIALABS
+
+
+    Copyright 2018 XEBIALABS
+
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 -->
 <synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd"
            xmlns="http://www.xebialabs.com/deployit/synthetic"
@@ -25,14 +31,24 @@
     </type>
 
     <type type="hipchat.NotificationTask" extends="hipchat.Task" virtual="true">
-        <property name="message" label="Message" category="input" required="true" description="HipChat notification message to send."/>
+        <property name="message" label="Message" category="input" required="true" description="HipChat notification message to send. Supports HTML tags."/>
+        <property name="color" label="Message Color" category="input" kind="enum" required="true" default="yellow" description="Color of the message.">
+            <enum-values>
+                <value>yellow</value>
+                <value>green</value>
+                <value>red</value>
+                <value>purple</value>
+                <value>gray</value>
+                <value>random</value>
+            </enum-values>
+        </property>
     </type>
 
-    <type type="hipchat.NotifyRoom" extends="hipchat.NotificationTask">
+    <type type="hipchat.NotifyRoom" label="HipChat: Notify Room" extends="hipchat.NotificationTask">
         <property name="room_id" category="input" label="Room" required="true" description="Name or ID of the HipChat room to notify."/>
     </type>
 
-    <type type="hipchat.MessageUser" extends="hipchat.NotificationTask">
+    <type type="hipchat.MessageUser" label="HipChat: Message User" extends="hipchat.NotificationTask">
         <property name="user_id" category="input" label="User" required="true" description="Name or email of the HipChat user to message."/>
     </type>
 </synthetic>
