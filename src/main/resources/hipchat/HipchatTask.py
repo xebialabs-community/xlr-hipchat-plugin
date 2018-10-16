@@ -14,4 +14,4 @@ from hipchat.Hipchat import HipchatClient
 hipchat = HipchatClient.get_client(hipchat_authentication)
 method = str(task.getTaskType()).lower().replace('.', '_')
 call = getattr(hipchat, method)
-output = call(locals())
+call(locals())

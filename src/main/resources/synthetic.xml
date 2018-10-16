@@ -45,11 +45,13 @@
     </type>
 
     <type type="hipchat.NotifyRoom" label="HipChat: Notify Room" extends="hipchat.NotificationTask">
-        <property name="room_id" category="input" label="Room" required="true" description="Name or ID of the HipChat room to notify."/>
+        <property name="room_id" category="input" label="Room" required="true" description="Name or ID of the HipChat room to notify. This field is deprecated and will be removed in the next major version of this plugin."/>
+        <property name="rooms" category="input" label="Rooms" required="true" description="List of names or IDs of the HipChat room to notify." kind="list_of_string"/>
     </type>
 
     <type type="hipchat.MessageUser" label="HipChat: Message User" extends="hipchat.NotificationTask">
-        <property name="user_id" category="input" label="User" required="true" description="Name or email of the HipChat user to message."/>
+        <property name="user_id" category="input" label="User" required="true" description="Name or email of the HipChat user to message. This field is deprecated and will be removed in the next major version of this plugin."/>
+        <property name="users" category="input" label="Users" required="true" description="List of names or emails of the HipChat users to message." kind="list_of_string"/>
     </type>
 </synthetic>
 

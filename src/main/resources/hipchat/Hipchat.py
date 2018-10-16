@@ -9,7 +9,7 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-import json, requests
+import json, requests, urllib
 
 class HipchatClient(object):
     def __init__(self, hipchat_authentication):
@@ -24,16 +24,30 @@ class HipchatClient(object):
     def get_client(hipchat_authentication):
         return HipchatClient(hipchat_authentication)
 
-    def notify(self, type, id, end, message, color):
+    def notify(self, type, id_or_name_list, end, message, color):
         message_json='{"message":%s,"notify":"true","color":"%s"}' % (json.dumps(message), color)
-        return self.get_response_for_endpoint('POST', '%s/%s/%s' % (type, id, end), 'Could not perform operation for [%s].' % id, data=message_json)
+
+        for id_or_name in id_or_name_list:
+            self.get_response_for_endpoint('POST', '%s/%s/%s' % (type, urllib.quote(id_or_name), end), 'Could not perform operation for [%s].' % id, data=message_json)
 
     def hipchat_notifyroom(self, variables):
-        return self.notify('room', variables['room_id'], 'notification', variables['message'],
+        rooms = variables['rooms']
+
+        # Add the single room_id if it exists (deprecated field)
+        if variables['room_id']:
+            rooms += [variables['room_id']]
+
+        self.notify('room', rooms, 'notification', variables['message'],
                            variables['color'])
 
     def hipchat_messageuser(self, variables):
-        return self.notify('user', variables['user_id'], 'message', variables['message'],
+        users = variables['users']
+
+        # Add the single user_id if it exists (deprecated field)
+        if variables['user_id']:
+            users += [variables['user_id']]
+
+        self.notify('user', users, 'message', variables['message'],
                            variables['color'])
 
     def open_url(self, method, url, headers=None, data=None, json_data=None):

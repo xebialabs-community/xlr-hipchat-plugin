@@ -18,7 +18,7 @@ This document describes the functionality provided by the `xlr-hipchat-plugin`
 This module offers a basic interface to HipChat functionality.
 
 ## Installation
-Copy the plugin JAR file into the `SERVER_HOME/plugins` directory of XL Release.
+Sewe [here](https://docs.xebialabs.com/xl-release/how-to/install-or-remove-xl-release-plugins.html)
 
 ## HipChat Authentication
 Configures the credentials used to authenticate with the HipChat REST API. You should use the API access token configured in your[HipChat](https://www.hipchat.com/account/api)account. Note that the token needs to have both the "send_message" and "send_notification" scopes available. 
@@ -29,12 +29,12 @@ Configures the credentials used to authenticate with the HipChat REST API. You s
 The available tasks for interfacing with HipChat. These tasks utilize the HipChat REST API and the provided HipChat Authentication Configuration.
 
 ### Notify Room
-Sends the specified notification to the specified room (name or ID).
+Sends the specified notification to a list of specified rooms (name or ID).
 
 ![HipChatNotifyRoom](images/HipChatNotifyRoom.png)
 
 ### Message User
-Sends the specified message to the specified user (@ReferenceName, ID, or email).
+Sends the specified message to a list of specified users (@ReferenceName, ID, or email).
 
 ![HipChatMessageUser](images/HipChatMessageUser.png)
 
