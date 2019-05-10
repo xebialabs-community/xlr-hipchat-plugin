@@ -12,6 +12,5 @@ deploy:
   api_key:
     secure: hZupYLg6WsRiFHBghFNl8K/a/LXozLtAlGppIgiVzT8wlzjivRpKyL8DjksJUyyyiODUQ5MOnCtHDnX+x/u2E9M0NCfDfrrKuwwkgfGMj6sfGYA8K4l9nO5j9/LLj24mjph1jWxtJLq6Hrs1eWXiqoK726xa0VV27a4sLQLHyhs=
 notifications:
-  hipchat:
-    rooms:
-      secure: PokzODAegGur+mie4WJo9qm5OqFNsFruxOLJ/PffSLcx+BOJlqUppjmPu4l+8O11FdggJ+Kw4UorQQGx/axoUYUPlkglyPiOs+g6gb/gC+CeXLyK5PRbAepn23mkO9vxDRtgwd0JU0L87DcEiKK1DlCJ1uT+uiyTcJa+VClaSuM=
+  slack:
+    secure: ELOVJWYJGNJx2WmjlemGPrjs6xvbTXQNpzPcfE0Yv5hFn8ZNmCNZNSoVo+1ZM0lSbFo0U78kEn6/JDwyCptOc4BBqwJ5P//nuMAa8/RdiSKkHAWoxjzYWS9M6nGiNwUp/5zJ/U7SpqNT4WR4eMJteu3P0lPwKapTwkvlus0Sfo0=
